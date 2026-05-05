@@ -77,9 +77,9 @@ class StockCardReportWizard(models.TransientModel):
                 init_moves = self.env['stock.move.line'].search(init_domain)
                 for move in init_moves:
                     if move.location_dest_id.id in location_ids:
-                        init_balance += move.qty_done
+                        init_balance += move.quantity
                     elif move.location_id.id in location_ids:
-                        init_balance -= move.qty_done
+                        init_balance -= move.quantity
 
             # ==== Get Move Lines In Date Range ====
             domain = [
@@ -116,10 +116,10 @@ class StockCardReportWizard(models.TransientModel):
             for move in move_lines:
                 qty_in = qty_out = 0.0
                 if move.location_dest_id.id in location_ids:
-                    qty_in = move.qty_done
+                    qty_in = move.quantity
                     balance += qty_in
                 elif move.location_id.id in location_ids:
-                    qty_out = move.qty_done
+                    qty_out = move.quantity
                     balance -= qty_out
 
                 # Try to get the valuation layer
