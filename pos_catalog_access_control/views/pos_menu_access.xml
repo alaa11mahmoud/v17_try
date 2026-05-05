@@ -1,6 +1,0 @@
-<odoo>
-    <!-- Restrict POS Catalog menu visibility to the new group -->
-    <record id="point_of_sale.pos_config_menu_catalog" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4, ref('pos_catalog_access_control.group_pos_catalog_access'))]"/>
-    </record>
-</odoo>

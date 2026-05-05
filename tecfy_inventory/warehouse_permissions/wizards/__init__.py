@@ -1,1 +1,0 @@
-from . import stock_picking_confirm_note_wizard
