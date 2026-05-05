@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_confirm_note_wizard_form" model="ir.ui.view">
+        <field name="name">stock.picking.confirm.note.wizard.form</field>
+        <field name="model">stock.picking.confirm.note.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Transfer with Notes">
+                <group>
+                    <field name="line_ids">
+                        <tree editable="bottom">
+                            <field name="product_id" readonly="1"/>
+                            <field name="quantity" readonly="1"/>
+                            <field name="note" placeholder="Enter your note here..."/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button string="Confirm" type="object" name="action_confirm_with_note" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

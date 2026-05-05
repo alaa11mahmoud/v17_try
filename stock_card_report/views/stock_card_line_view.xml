@@ -1,0 +1,21 @@
+<odoo>
+    <record id="view_stock_card_line_list" model="ir.ui.view">
+        <field name="name">stock.card.line.list</field>
+        <field name="model">stock.card.line</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Card Lines" default_group_by="product_id">
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="created_by_id"/>
+                <field name="product_id"/>
+                <field name="unit_cost"/>
+                <field name="location_from_id"/>
+                <field name="location_to_id"/>
+                <field name="qty_in"/>
+                <field name="qty_out"/>
+                <field name="value"/>
+                <field name="balance"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

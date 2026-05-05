@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_hr.ClosePosPopup">
+        <div class="popup-close-pos">
+            <div class="0">
+            </div>
+            <div class="custom-content">
+                <span>المحتوى المخصص</span>
+            </div>
+        </div>
+    </t>
+</templates>

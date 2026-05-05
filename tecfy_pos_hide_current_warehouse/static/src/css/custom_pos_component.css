@@ -1,0 +1,14 @@
+.product-information-tag {
+  display: unset !important;
+}
+.product-info-popup .section-financials {
+  display: none;
+}
+
+.product-info-popup .section-supplier {
+  display: none;
+}
+
+.product-info-popup .section-order {
+  display: none;
+}

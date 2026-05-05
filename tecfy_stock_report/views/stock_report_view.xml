@@ -1,0 +1,20 @@
+<odoo>
+    <record id="view_stock_report_tree" model="ir.ui.view">
+        <field name="name">tecfy.stock.report.tree</field>
+        <field name="model">tecfy.stock.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_ids"/>
+                <field name="warehouse_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_report" model="ir.actions.act_window">
+        <field name="name">Stock Report</field>
+        <field name="res_model">tecfy.stock.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

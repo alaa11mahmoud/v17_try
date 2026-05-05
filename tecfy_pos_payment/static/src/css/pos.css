@@ -1,0 +1,7 @@
+.payment-methods-overview ~ div.w-100.mb-3:not(:nth-of-type(n+5)) {
+    display: none !important;
+}
+/* 
+.payment-methods-overview ~ div.w-100.mb-3:nth-of-type(7) {
+    display: none !important;
+} */

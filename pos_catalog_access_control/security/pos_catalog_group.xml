@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Custom group for POS Catalog menu access -->
+    <record id="group_pos_catalog_access" model="res.groups">
+        <field name="name">POS Catalog Access</field>
+        <field name="category_id" ref="base.module_category_point_of_sale"/>
+        <!-- Include Administrators -->
+        <field name="implied_ids" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
+    <!-- Add user ID 9 to this group -->
+    <!-- <record id="user_9_pos_catalog_access" model="res.users">
+        <field name="id" eval="9"/>
+        <field name="groups_id" eval="[(4, ref('pos_catalog_access_control.group_pos_catalog_access'))]"/>
+    </record> -->
+</odoo>

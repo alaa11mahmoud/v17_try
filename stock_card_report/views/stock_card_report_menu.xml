@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem
+        id="menu_stock_card_report"
+        name="Stock Card Report"
+        parent="stock.menu_warehouse_report"
+        action="action_stock_card_report_wizard"
+        sequence="350"/>
+</odoo>

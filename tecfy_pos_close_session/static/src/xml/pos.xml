@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="tecfy_pos_close_session.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//li[@class='close-button']" position="replace">
+            <li class="close-button" t-on-click="closeSession">
+                <a class="dropdown-item py-2">
+                    Close Session
+                </a>
+            </li>
+        </xpath>
+    </t>
+</templates>

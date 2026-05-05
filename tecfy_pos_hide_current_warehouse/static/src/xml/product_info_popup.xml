@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" t-inherit-mode="extension">
+
+        <xpath expr="//t[@t-foreach='productInfo.warehouses']" position="replace">
+            <!-- 1) store current POS warehouse -->
+            <t t-set="picking_type_id" t-value="pos.config.picking_type_id[0]"/>
+            <t t-set="my_warehouse_name" t-value="pos.config.warehouse_name || false"/>
+            
+            <!-- 2) filter warehouses (exclude current) -->
+            <t t-set="filtered_warehouses" t-value="productInfo.warehouses.filter(w => w.name !== my_warehouse_name)"/>
+
+            <!-- 3) Define Category Lists -->
+            <t t-set="riyadh_list" t-value="['مخزن فرع حي الحمراء', 'مخزن فرع السلام الرياض', 'مخزن فرع الريان', 'مخزن فرع حي الصحافة', 'مخزن فرع حي النزهة', 'مخزن فرع الوادي']"/>
+            <t t-set="jeddah_list" t-value="['فرع خط الملك', 'مخزن فرع ابحر', 'مخزن فرع البساتين', 'مخزن فرع الحمدانية', 'مخزن فرع الرحيلي', 'مخزن فرع الروضة', 'مخزن فرع الزهرا', 'مخزن فرع الفيحاء', 'مخزن فرع الشفا', 'مخزن فرع السنابل', 'مخزن فرع المرجان', 'مخزن فرع المروة', 'مخزن فرع النهضة', 'مخزن فرع صقر قريش', 'مخزن فرع قريش', 'مخزن فرع نادي الزهراء', 'مخزن فرع السلام مول', 'مخزن فرع البترجي']"/>
+            <t t-set="eastern_list" t-value="['مخزن فرع الشعلة', 'فرع الخبر', 'مخزن فرع الخليج']"/>
+            <t t-set="southern_list" t-value="['مخزن فرع أبها', 'مخزن فرع أبو عريش', 'مخزن فرع جيزان']"/>
+            <t t-set="mecca_list" t-value="['مخزن فرع الشوقية']"/>
+            <t t-set="others_explicit_list" t-value="['المخزن الرئيسي', 'مستودع محمد خليل', 'مرتجعات المشتريات', 'مرتجعات صقر قريش', 'الادارة', 'مستودع طيبة', 'مخزن مصدر']"/>
+            
+            <t t-set="all_explicit_names" t-value="riyadh_list.concat(jeddah_list).concat(eastern_list).concat(southern_list).concat(mecca_list).concat(others_explicit_list)"/>
+
+            <t t-set="sections" t-value="[
+                {title: 'فروع الرياض', list: riyadh_list},
+                {title: 'فروع جدة', list: jeddah_list},
+                {title: 'فروع الشرقية', list: eastern_list},
+                {title: 'فروع الجنوب', list: southern_list},
+                {title: 'فروع مكة', list: mecca_list}
+            ]"/>
+
+            <!-- 4) Display Sections -->
+            <t t-foreach="sections" t-as="section" t-key="section.title">
+                <div style="background-color: #f8f9fa; padding: 5px 10px; font-weight: bold; color: #000; margin-top: 10px; border-radius: 4px; border-left: 4px solid #714B67;">
+                    <t t-esc="section.title"/>
+                </div>
+                <t t-foreach="section.list" t-as="w_name" t-key="w_name">
+                    <t t-set="warehouse" t-value="filtered_warehouses.find(w => w.name === w_name)"/>
+                    <t t-if="warehouse">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid #eee;">
+                            <div style="font-weight: 500; font-size: 15px; color: #333;">
+                                <t t-esc="warehouse.name" class="table-name"/>
+                            </div>
+                            <div style="background-color: #f1f1f1; padding: 2px 8px; border-radius: 12px; font-size: 14px;">
+                                <span class="fw-bolder" style="color: #2c3e50;"><t t-esc="warehouse.available_quantity"/></span>
+                                <span style="font-size: 12px; color: #777;"> <t t-esc="warehouse.uom"/> </span>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+            <!-- 5) Display Others (Explicit + Remaining) -->
+            <div style="background-color: #f8f9fa; padding: 5px 10px; font-weight: bold; color: #000; margin-top: 10px; border-radius: 4px; border-left: 4px solid #714B67;">
+                مخازن اخرى
+            </div>
+            
+            <!-- Explicit Others -->
+            <t t-foreach="others_explicit_list" t-as="w_name" t-key="w_name">
+                <t t-set="warehouse" t-value="filtered_warehouses.find(w => w.name === w_name)"/>
+                <t t-if="warehouse">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid #eee;">
+                        <div style="font-weight: 500; font-size: 15px; color: #333;">
+                            <t t-esc="warehouse.name" class="table-name"/>
+                        </div>
+                        <div style="background-color: #f1f1f1; padding: 2px 8px; border-radius: 12px; font-size: 14px;">
+                            <span class="fw-bolder" style="color: #2c3e50;"><t t-esc="warehouse.available_quantity"/></span>
+                            <span style="font-size: 12px; color: #777;"> <t t-esc="warehouse.uom"/> </span>
+                        </div>
+                    </div>
+                </t>
+            </t>
+
+            <!-- Implicit Others (New/Remaining) -->
+            <t t-foreach="filtered_warehouses" t-as="warehouse" t-key="warehouse.name">
+                <t t-if="!all_explicit_names.includes(warehouse.name)">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid #eee;">
+                        <div style="font-weight: 500; font-size: 15px; color: #333;">
+                            <t t-esc="warehouse.name" class="table-name"/>
+                        </div>
+                        <div style="background-color: #f1f1f1; padding: 2px 8px; border-radius: 12px; font-size: 14px;">
+                            <span class="fw-bolder" style="color: #2c3e50;"><t t-esc="warehouse.available_quantity"/></span>
+                            <span style="font-size: 12px; color: #777;"> <t t-esc="warehouse.uom"/> </span>
+                        </div>
+                    </div>
+                </t>
+            </t>
+
+        </xpath>
+
+    </t>
+</templates>

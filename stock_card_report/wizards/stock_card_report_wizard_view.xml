@@ -1,0 +1,58 @@
+<odoo>
+    <record id="view_stock_card_report_wizard" model="ir.ui.view">
+        <field name="name">stock.card.report.wizard.form</field>
+        <field name="model">stock.card.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Stock Card Report">
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="location_ids" widget="many2many_tags"/>
+                    <field name="warehouse_partner_ids" widget="many2many_tags"/>
+                    <field name="product_ids" widget="many2many_tags"/>
+                </group>
+
+                <footer>
+                    <button name="action_print_report" type="object" class="btn-primary" string="Generate Report"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stock_card_line_search" model="ir.ui.view">
+        <field name="name">stock.card.line.search</field>
+        <field name="model">stock.card.line</field>
+        <field name="arch" type="xml">
+            <search string="Stock Card Lines">
+                <field name="product_id"/>
+                <field name="date"/>
+                <field name="location_from_id"/>
+                <field name="location_to_id"/>
+                <field name="reference"/>
+                <field name="wizard_id"/>
+
+                <separator/>
+
+                <!-- Valid filters -->
+                <filter string="Today" name="today" domain="[('date', '=', context_today())]"/>
+
+                <group expand="1" string="Group By">
+                    <filter string="Product" name="group_by_product" context="{'group_by': 'product_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                    <filter string="From Location" name="group_by_location_from" context="{'group_by': 'location_from_id'}"/>
+                    <filter string="To Location" name="group_by_location_to" context="{'group_by': 'location_to_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_stock_card_report_wizard" model="ir.actions.act_window">
+        <field name="name">Stock Card Report</field>
+        <field name="res_model">stock.card.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="search_view_id" ref="view_stock_card_line_search"/>
+    </record>
+
+</odoo>

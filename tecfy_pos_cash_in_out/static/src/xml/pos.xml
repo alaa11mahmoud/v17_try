@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="tecfy_pos_cash_in_out.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//li[@t-on-click='onCashMoveButtonClick']" position="replace">
+            <li class="menu-item navbar-button" t-on-click="onCashMoveButtonClick">
+                <a class="dropdown-item py-2">
+                    Cash In/Out
+                </a>
+            </li>
+        </xpath>
+    </t>
+</templates>

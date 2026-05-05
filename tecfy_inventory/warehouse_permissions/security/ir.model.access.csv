@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_warehouse_custom,access.stock.warehouse.custom,model_stock_warehouse,,1,1,1,1
+access_stock_picking_custom,access.stock.picking.custom,model_stock_picking,,1,1,1,1
+access_note_wizard,access.stock.picking.confirm.note.wizard,model_stock_picking_confirm_note_wizard,,1,1,1,1
+access_note_line,access.stock.picking.confirm.note.line,model_stock_picking_confirm_note_line,,1,1,1,1
+access_pos_config_custom,access.pos.config.custom,point_of_sale.model_pos_config,,1,1,1,1
