@@ -8,6 +8,12 @@
     'data': [
         'views/stock_card_actions.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'stock_card_rep_excel/static/src/js/stock_card_export.js',
+            'stock_card_rep_excel/static/src/xml/stock_card_export.xml',
+        ],
+    },
     'installable': True,
     'application': True,
 }

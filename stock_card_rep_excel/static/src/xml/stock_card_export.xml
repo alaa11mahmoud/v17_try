@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="stock_card_rep_excel.StockCardExportItem">
+        <DropdownItem class="'o_stock_card_export_xlsx'" onSelected="() => this.onClick()">
+            Export Stock Card (Excel)
+        </DropdownItem>
+    </t>
+</templates>
